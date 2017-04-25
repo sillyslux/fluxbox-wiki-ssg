@@ -1,0 +1,82 @@
+.editor
+  height: 100%
+  overflow: hidden
+  & :global
+    #react-mount
+      height: 100%
+      .react-root
+        height: 100%
+        & > div
+          display: flex
+          flex-direction: column
+          align-self: stretch
+          flex: 1
+    .octicon
+      display: inline-block
+      vertical-align: text-top
+      fill: currentColor
+    .editorContainer
+      width: 100%
+      padding: 15px
+      overflow: hidden
+      flex: 1
+      display: flex
+    .footer
+      margin-top: 0
+    .navEdit
+      flex: none
+      .navbar
+        margin-bottom: 0
+        border-radius: 0
+        border: 0
+        border-bottom: 1px solid transparent
+        button
+          margin: 5px
+      .octicon
+        display: inline-block
+        vertical-align: text-top
+        fill: currentColor
+    .glyphicon-transfer
+      animation-duration: 0.3s
+      animation-name: changewidth
+      animation-iteration-count: infinite
+      animation-direction: alternate
+    .userInfo
+      hr
+        width: 100%
+      .avatar
+        height: 100px
+        width: 100px
+        background-size: contain
+        float: left
+        margin: 0 20px 20px 0
+      .userName
+        font-size: 1.6em
+        font-weight: bold
+        color: #469408
+    .tokenInput
+      position: relative
+
+    .editSecondary
+      display: none
+    .editPrimary
+      overflow: auto
+      margin: 0
+      flex: 1
+      white-space: pre-wrap
+      word-wrap: break-word
+      -webkit-user-modify: read-write-plaintext-only
+    del
+      text-decoration: none
+      color: #b30000
+      background: #fadad7
+    ins
+      background: #eaf2c2
+      color: #406619
+      text-decoration: none
+
+@keyframes changewidth
+  from
+    transform: rotateY(0deg)
+  to
+    transform: rotateY(180deg)

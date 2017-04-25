@@ -1,0 +1,19 @@
+.subnav-history
+  position: absolute
+  width: 100%
+  top: 43px
+  background-color: rgba(255, 255, 255, 1)
+  margin: 0
+  border-bottom: 1px solid #ddd
+  border-radius: 0
+  text-align: right
+  right: 0
+  &.slideUp:hover
+    animation-name: slideDown
+  .nav
+    li
+      display: inline-block
+  li + li.bcDropdown
+    &::before
+      content: '\A0'
+      padding: 0

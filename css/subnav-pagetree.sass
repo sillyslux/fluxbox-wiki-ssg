@@ -1,0 +1,48 @@
+body {
+  background: #222
+}
+/*
+ * breadcrumbs buttons
+ */
+.headroom .subnav-pagetree
+  top: 43px
+  position: absolute
+  width: 100%
+  margin: 0
+  padding: 8px 15px
+  background-color: rgba(255, 255, 255, 1)
+  border-bottom: 1px solid #ddd
+  .dropdown.btn-group .btn-link
+    padding: 0 4px
+    border: 0
+  .open
+    .dropdown-menu
+      opacity: 1
+  .dropdown-menu
+    opacity: 0
+    margin-top: 8px
+    border-top-left-radius: 0
+    border-top-right-radius: 0
+    transition: opacity 0.3s linear
+    animation-duration: 0.3s
+    animation-fill-mode: both
+    will-change: transform, opacity
+    animation-name: slideDown
+    display: block
+  &.slideUp:hover
+    animation-name: slideDown
+  .dropdown.btn-group.btn-group-link + .dropdown.btn-group.btn-group-link:before
+    content: '/'
+    margin: 0 6px
+    float: left
+  &.slideUp
+    .dropdown-menu
+      opacity: 0
+      animation-name: slideUp
+  .dropdown-menu:hover
+    li
+      &.active a
+        background-color: #fff
+        color: #d9230f
+        &:hover
+          border: 0

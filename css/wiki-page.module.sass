@@ -1,0 +1,15 @@
+// sidebar-left
+// should be visible only in wiki-entry and devel-entry
+
+.wiki-page
+  margin-top: 100px
+
+  & :global
+    h1, h2, h3, h4, h5, h6
+      &:hover .permalink
+        visibility: visible
+      .permalink
+        visibility: hidden
+        margin: 0 0 0 -1em
+        position: relative
+        font-size: .8em

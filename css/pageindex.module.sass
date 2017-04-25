@@ -1,0 +1,54 @@
+.pageindex
+  margin-top: -20px
+  background: rgba(255,255,255,.5)
+  // border-width: 0
+  // box-shadow: 0 0
+
+  & :global
+    *
+      background: transparent !important
+    .panel-heading
+      display: flex
+      justify-content: space-between
+      border-width: 0
+      span, a
+        padding: 0 8px
+    .panel-body
+      display: flex
+      flex-direction: row
+      justify-content: space-between
+      flex-wrap: wrap
+      &::before
+        content: initial
+      .panel
+        border: 0
+        box-shadow: 0 0
+        position: relative
+        padding: 0 20px 0 14px
+        .panel-heading
+          position: absolute
+          height: 100%
+          border-right: 1px solid #ddd
+          border-radius: 0
+          padding: 4px 8px
+          left: 0
+          top: 0
+          width: 25px
+          h4
+            line-height: inherit
+            font-weight: bold
+            color: #ccc
+            margin-top: 1px
+
+        .panel-body
+          padding: 4px 6px
+          font-size: 15px
+        .list-group-item
+          border-width: 0
+          padding: 0 0 0 15px
+          a
+            &:link, &:visited
+              color: #444
+            &:hover
+              color: #d9230f
+              text-decoration: none

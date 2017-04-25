@@ -1,0 +1,87 @@
+/*
+ * navbar.css
+ */
+.headroom--pinned .navbar
+  margin-bottom: 0
+.headroom .navbar
+  top: 0
+  border-width: 0 0 1px
+  border-radius: 0
+  right: 0
+  left: 0
+  z-index: 1030
+  margin-bottom: 0
+#duck-search
+  margin: 5px 0 0
+.nav li
+  margin-bottom: 0
+.navbar-logo
+  background: url('images/logo.png')
+  display: inline-block
+  height: 40px
+  width: 60px
+  vertical-align: top
+  margin-top: -10px
+  margin-right: -20px
+
+.navbar-form
+  display: inline-block
+
+.nav .dropdown-menu>.disabled>a,
+.nav .dropdown-menu>.disabled>a:focus,
+.nav .dropdown-menu>.disabled>a:hover
+  color: #999
+
+#basic-nav-dropdown
+  background: rgba(255, 255, 255, 0.5)
+  padding: 5px 8px
+#basic-nav-dropdown .caret
+  vertical-align: super
+  color: #d9230f
+
+.navbar-header img
+  display: inline-block !important
+  margin-right: -20px
+.navbar-header .logo
+  height: 48px
+  width: 68px
+  display: inline-block
+  float: left
+
+pre
+  background-color: rgba(245,245,245,.5) !important
+
+.language-plain *
+  color: #333
+  font-weight: normal
+  font-style: normal
+
+.animated-input input
+  animation-duration: 0.5s
+  animation-fill-mode: both
+  will-change: transform, opacity
+#duck-search .animated-input
+  position: absolute
+  input
+    position: absolute
+    right: 0
+    width: 230px
+
+
+@keyframes inputDown
+  0%
+    transform: translateY(-200%)
+  100%
+    transform: translateY(0)
+
+.animated-input.slideUp input:focus
+  animation-name: inputDown
+
+@keyframes inputUp
+  0%
+    transform: translateY(0)
+  100%
+    transform: translateY(-200%)
+
+.animated-input.slideUp input
+  animation-name: inputUp

@@ -1,0 +1,5 @@
+noProductionJavascript = true
+
+siteTitle  = "Fluxbox Wiki"
+prodDomain = "//sillyslux.github.io"
+linkPrefix = "/fluxbox-wiki"

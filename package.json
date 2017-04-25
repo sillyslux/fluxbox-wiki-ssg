@@ -1,0 +1,51 @@
+{
+  "name": "fluxbox-wiki.org",
+  "description": "fluxbox-wiki homepage, created with Gatsby Static Site Generator",
+  "homepage": "https://fluxbox-wiki.org/",
+  "version": "1.0.0",
+  "author": "sillyslux <sillyslux@net.hr>",
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "front-matter": "^2.1.2",
+    "gatsby": "^0.12.44",
+    "highlight.js": "^9.8.0",
+    "history": "^2.0.2",
+    "markdown-it": "^7.0.1",
+    "markdown-it-abbr": "^1.0.3",
+    "markdown-it-anchor": "^4.0.0",
+    "markdown-it-attrs": "^0.6.3",
+    "markdown-it-deflist": "^2.0.1",
+    "markdown-it-footnote": "^3.0.1",
+    "markdown-it-header-sections": "^0.2.2",
+    "markdown-it-replace-link": "^1.0.1",
+    "markdown-it-sub": "^1.0.0",
+    "object-assign": "^4.1.1",
+    "octicons": "^5.0.1",
+    "prop-types": "^15.5.8",
+    "react-bootstrap-externaljs": "^0.30.8-silly.1",
+    "react-headroom": "^2.1.2",
+    "react-helmet": "^3.2.2",
+    "react-router-bootstrap": "^0.23.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3",
+    "gh-pages": "^0.12.0"
+  },
+  "keywords": [
+    "fluxbox",
+    "fluxbox-wiki"
+  ],
+  "license": "unknown",
+  "main": "n/a",
+  "scripts": {
+    "build": "gatsby build --prefix-links",
+    "travis-build": "node_modules/.bin/gatsby build --prefix-links",
+    "deploy": "gatsby build --prefix-links && gh-pages -d public",
+    "develop": "gatsby develop",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

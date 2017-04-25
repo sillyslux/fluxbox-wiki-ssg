@@ -1,0 +1,18 @@
+{
+  "extends": "eslint-config-airbnb",
+  "plugins": ["react"],
+  "rules": {
+    "import/extensions": [0],
+    "import/no-extraneous-dependencies": [0],
+    "import/no-unresolved": [0],
+    "no-debugger": [0],
+    "no-confusing-arrow": ["error", {"allowParens": true}],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/prefer-es6-class": [0],
+    "react/no-danger": [0],
+    "react/prefer-stateless-function": [0],
+    "semi": [2, "never"],
+    "space-before-function-paren": [2, "always"],
+    "space-infix-ops": [0],
+  }
+}

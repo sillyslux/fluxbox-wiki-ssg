@@ -1,0 +1,22 @@
+[languages]
+  de = "Deutsch"
+  en = "English"
+  es = "Español"
+  fi = "Finlândia"
+  fr = "Français"
+  hr = "Hrvatski"
+  it = "Italiano"
+  kp = "한국어"
+  pt = "Português"
+  ru = "русский"
+
+[warnings]
+  de = "<p><b>Hinweis: diese Übersetzung ist veraltet</b></p><p>Die englische Version dieser Seite wurde bearbeitet. Diese Übersetzung muss angepasst werden.</p>"
+  es = "<p><b>Nota: esta traducción es obsoleta</b></p><p>La versión en Inglés de esta página ha sido editado. Esta traducción se debe ajustar.</p>"
+  fi = "<p><b>Huomaa: Tämä käännös on vanhentunut</b></p><p>Englanti versio tästä sivusta on muokattu. Tämä käännös on säädettävä.</p>"
+  fr = "<p><b>Remarque: cette traduction est obsolète</b></p><p>La version anglaise de cette page a été modifiée. Cette traduction doit être ajustée.</p>"
+  hr = "<p><b>Napomena: ovaj prijevod je zastario</b></p><p>Engleska verzija ove stranice je uređivana. Ovaj prijevod mora biti prilagođen.</p>"
+  it = "<p><b>Nota: questa traduzione è obsoleto</b></p><p>La versione inglese di questa pagina è stato modificato. Questa traduzione deve essere regolato.</p>"
+  kp = "<p><b>참고 :이 번역은 오래된</b></p><p>이 페이지의 영어 버전은 편집되었습니다. 이 번역은 조정해야합니다.</p>"
+  pt = "<p><b>Nota: esta tradução está desatualizada</b></p><p>A versão em Inglês desta página foi editada. Esta tradução deve ser ajustado.</p>"
+  ru = "<p><b>Примечание: этот перевод устарел</b></p><p>Английская версия этой страницы была отредактирована. Этот перевод должен быть отрегулирован.</p>"

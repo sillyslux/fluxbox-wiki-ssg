@@ -1,0 +1,23 @@
+language: node_js
+node_js:
+  - "7"
+before_install:
+  - git clone -b master https://github.com/sillyslux/fluxbox-wiki.git pages
+  - cp -r _pages/* pages
+script:
+  - npm run-script travis-build
+  - webpack --config editor/webpack.config.js
+after_script:
+  - env
+  - rm -rf css config.toml utils package.json editor fonts html.js loaders node_modules gatsby-browser.js i18n.toml .eslintrc wrappers gatsby-node.js LICENSE .travis.yml static custom README.md .gitignore pages
+  - git clone -b gh-pages https://github.com/sillyslux/fluxbox-wiki.git gh-pages
+  - mv public/* gh-pages
+  - cd gh-pages
+  - git add --all
+  - git commit -m "travis $(date '+%m/%d/%y %H:%M')"
+  - git push https://$GITHUB_TOKEN@github.com/sillyslux/fluxbox-wiki.git
+git:
+  depth: 1
+branches:
+  only:
+  - master
