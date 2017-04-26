@@ -41,7 +41,7 @@ export default class DevelPortal extends Component {
         </Col>
         <Col xs={9} lg={10} className="content">
           {this.props.children}
-          {page.file.dir === 'DevelPortal/Index' ? <PageIndex location={this.props.location} /> : ''}
+          {page.file.dir === 'DevelPortal/Index' ? <PageIndex location={this.props.location} wiki="devel" /> : ''}
         </Col>
       </Grid>
     )

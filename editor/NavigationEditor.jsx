@@ -172,8 +172,8 @@ class EditorNav extends Component {
               ['user', 'you need to provide an github access token'],
               ['magnet', 'tesicon'],
             ].map(name => this.getIcon(name))}
-            <OverlayTrigger placement="bottom" overlay={<Tooltip>Github User</Tooltip>}>
-              <Button bsStyle="primary" bsSize="sm">
+            <OverlayTrigger placement="bottom" overlay={<Tooltip id="user-menu">Github User</Tooltip>}>
+              <Button bsStyle="primary" bsSize="sm" onClick={(e) => this.open(e)}>
                 <Glyphicon glyph="user" />
               </Button>
             </OverlayTrigger>

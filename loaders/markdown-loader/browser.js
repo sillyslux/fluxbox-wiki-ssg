@@ -75,18 +75,18 @@ const md = markdownIt({
     return prefixed
   },
 })
-.use(require('markdown-it-container'), // plugin
-  'foobar', // plugin param1, mandatory
-  { // plugin param2
-    validate: name => name.trim().length, // allow everything not empty (by i don't recommend)
-    render: (tokens, idx) => {
-      const m = tokens[idx].info.trim()
-      if (tokens[idx].nesting === 1) {
-        return `<div class="${md.utils.escapeHtml(m)}">\n`
-      }
-      return '</div>\n'
-    },
-  })
+// .use(require('markdown-it-container'), // plugin
+//   'foobar', // plugin param1, mandatory
+//   { // plugin param2
+//     validate: name => name.trim().length, // allow everything not empty (by i don't recommend)
+//     render: (tokens, idx) => {
+//       const m = tokens[idx].info.trim()
+//       if (tokens[idx].nesting === 1) {
+//         return `<div class="${md.utils.escapeHtml(m)}">\n`
+//       }
+//       return '</div>\n'
+//     },
+//   })
   .use(require('markdown-it-replace-link'))
   .use(require('markdown-it-sub'))
   .use(require('markdown-it-footnote'))

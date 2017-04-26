@@ -15,7 +15,11 @@ export default class PageIndex extends Component {
     const { language } = pageInfo(this.props.location.pathname)
 
     // find all pages in /pages/WikiPages
-    const indexedPages = pages.filter(a => /WikiPages\/.+\/.?/.test(a.requirePath)&&a.file.name===language).sort((a, b) => a.data.title > b.data.title)
+    const indexedPages = this.props.wiki === "user" ?
+      pages.filter(a => /WikiPages\/.+\/.?/.test(a.requirePath)&&a.file.name===language).sort((a, b) => a.data.title > b.data.title)
+      :
+      pages.filter(a => /DevelPages\/.+\/.?/.test(a.requirePath)&&a.file.name===language).sort((a, b) => a.data.title > b.data.title)
+
 
     let index = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(letter => ({ letter, pages: [] }))
 

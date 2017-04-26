@@ -43,7 +43,7 @@ export default class WikiPortal extends Component {
         </Col>
         <Col xs={9} lg={10} className="content">
           {this.props.children}
-          {page.file.dir === 'WikiPortal/Index' ? <PageIndex location={this.props.location} /> : ''}
+          {page.file.dir === 'WikiPortal/Index' ? <PageIndex location={this.props.location} wiki="user" /> : ''}
         </Col>
       </Grid>
     )

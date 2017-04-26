@@ -9,13 +9,12 @@ script:
   - webpack --config editor/webpack.config.js
 after_script:
   - env
-  - rm -rf css config.toml utils package.json editor fonts html.js loaders node_modules gatsby-browser.js i18n.toml .eslintrc wrappers gatsby-node.js LICENSE .travis.yml static custom README.md .gitignore pages
   - git clone -b gh-pages https://github.com/sillyslux/fluxbox-wiki.git gh-pages
-  - mv public/* gh-pages
+  - rm -r gh-pages/* && cp -r public/* gh-pages
   - cd gh-pages
-  - git add --all
-  - git commit -m "travis $(date '+%m/%d/%y %H:%M')"
-  - git push https://$GITHUB_TOKEN@github.com/sillyslux/fluxbox-wiki.git
+  - git add --all .
+  - GIT_COMMITTER_NAME="sillyslux" GIT_COMMITTER_EMAIL="sillyslux@net.hr" git commit --author "sillyslux <sillyslux@net.hr>" -m "travis $(date '+%m/%d/%y %H:%M')"
+  - git push https://$GITHUB_TOKEN@github.com/sillyslux/fluxbox-wiki.git gh-pages
 git:
   depth: 1
 branches:

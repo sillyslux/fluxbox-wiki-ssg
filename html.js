@@ -24,9 +24,7 @@ export default class HTML extends Component {
         <link rel="stylesheet" href={prefixLink('/styles.css')} />,
         <script dangerouslySetInnerHTML={{ __html: `window.linkPrefix="${prefixLink('')}"` }} />,
       ]
-      if (checkPath('/editor/', this.props.location.pathname)) {
-        script = <script src={prefixLink('/bundle-editor.js')} />
-      } else if (!checkPath(['/chat/', '/editor/'], this.props.location.pathname)) {
+      if (!checkPath(['/chat/', '/editor/'], this.props.location.pathname)) {
         script = [
           <script src={prefixLink('/bootstrap-native.min.js')} />,
           <script src={prefixLink('/headroom.min.js')} />,
