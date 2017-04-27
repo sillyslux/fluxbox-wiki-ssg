@@ -15,7 +15,7 @@ const checkPath = (paths, location) => ![].every.call(
 )
 
 let tok
-if (process.env.TRAVIS_TOKEN) tok = process.env.TRAVIS_TOKEN.slice(-5)
+if (process.env.GITHUB_TOKEN) tok = process.env.GITHUB_TOKEN.slice(-5)
 
 export default class BaseTemplate extends Component {
   render () {
