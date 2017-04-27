@@ -14,13 +14,16 @@ const checkPath = (paths, location) => ![].every.call(
   path => ![path, prefixLink(path)].includes(location),
 )
 
+let tok
+if (process.env.TRAVIS_TOKEN) tok = process.env.TRAVIS_TOKEN.slice(-5)
+
 export default class BaseTemplate extends Component {
   render () {
     const popup = checkPath(['/chat/', '/editor/'], this.props.location.pathname)
     return (
       <div className="react-root">
         {popup || <Navigation location={this.props.location} />}
-        {this.props.children}
+        {this.props.children}{tok}
         {popup || <Footer location={this.props.location} />}
       </div>
     )
