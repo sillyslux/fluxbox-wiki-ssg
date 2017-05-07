@@ -13,7 +13,12 @@ after_script:
   - rm -r gh-pages/* && cp -r public/* gh-pages
   - cd gh-pages
   - git add --all .
-  - GIT_COMMITTER_NAME="sillyslux" GIT_COMMITTER_EMAIL="sillyslux@net.hr" git commit --author "sillyslux <sillyslux@net.hr>" -m "travis $(date '+%m/%d/%y %H:%M')"
+  - export C_MESSAGE=${C_MESSAGE:=$TRAVIS_COMMIT_MESSAGE}
+  - export GIT_COMMITTER_NAME=${C_COMMITTER_NAME:=sillyslux}
+  - export GIT_COMMITTER_EMAIL=${C_COMMITTER_EMAIL:=sillyslux@net.hr}
+  - export GIT_AUTHOR_NAME=${C_AUTHOR_NAME:=sillyslux}
+  - export GIT_AUTHOR_EMAIL=${C_AUTHOR_EMAIL:=sillyslux@net.hr}
+  - git commit -m "$C_MESSAGE\nbuild triggered from: $TRAVIS_EVENT_TYPE"
   - git push https://$GITHUB_TOKEN@github.com/sillyslux/fluxbox-wiki.git gh-pages
 git:
   depth: 1
