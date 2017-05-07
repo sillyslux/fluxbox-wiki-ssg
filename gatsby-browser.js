@@ -46,6 +46,8 @@ if (typeof document !== 'undefined' && process.env.NODE_ENV === 'development') {
     }
     if (editorWindow) editorWindow.postMessage(pageInfo(route.pathname), 'http://localhost:8000')
     window.onmessage = (msg) => {
+      if (msg.data.source.startsWith('react-devtools')) return
+      console.log('reset contents',msg)
       if (msg.data==='getFilename') {
         editorWindow=msg.source
         editorWindow.postMessage(pageInfo(route.pathname), 'http://localhost:8000')

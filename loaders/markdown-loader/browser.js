@@ -56,7 +56,7 @@ function permalink (md) {
       text: tokens[index+1].content,
       slug: string(tokens[index+1].content).slugify().toString(),
     })
-    return `<${tokens[index].tag}><a id="${string(tokens[index+1].content).slugify().toString()}"></a><a class="permalink" href="#${string(tokens[index-1].content).slugify().toString()}"><span class="glyphicon glyphicon-link"></span></a>`
+    return `<${tokens[index].tag}><a id="${string(tokens[index+1].content).slugify().toString()}"></a><a class="permalink" href="#${string(tokens[index+1].content).slugify().toString()}"><span class="glyphicon glyphicon-link"></span></a>`
   }
   md.renderer.rules.heading_close = (tokens, index) => `</${tokens[index].tag}>`
 }

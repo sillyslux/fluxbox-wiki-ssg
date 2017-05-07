@@ -59,9 +59,15 @@ export default class HTML extends Component {
   }
 }
 
+HTML.defaultProps = {
+  location: {
+    pathname: '',
+  },
+}
+
 HTML.propTypes = {
   body: PropTypes.string.isRequired,
   location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired,
-  }).isRequired,
+    pathname: PropTypes.string,
+  }),
 }

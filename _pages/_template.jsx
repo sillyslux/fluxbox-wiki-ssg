@@ -14,16 +14,13 @@ const checkPath = (paths, location) => ![].every.call(
   path => ![path, prefixLink(path)].includes(location),
 )
 
-let tok
-if (process.env.GITHUB_TOKEN) tok = process.env.GITHUB_TOKEN.slice(-5)
-
 export default class BaseTemplate extends Component {
   render () {
     const popup = checkPath(['/chat/', '/editor/'], this.props.location.pathname)
     return (
       <div className="react-root">
         {popup || <Navigation location={this.props.location} />}
-        {this.props.children}{tok}
+        {this.props.children}
         {popup || <Footer location={this.props.location} />}
       </div>
     )

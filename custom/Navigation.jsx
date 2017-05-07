@@ -59,6 +59,6 @@ export default class Navigation extends Component {
 
 Navigation.propTypes = {
   location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired,
-  }),
+    pathname: PropTypes.string,
+  }).isRequired,
 }
