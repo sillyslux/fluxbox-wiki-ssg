@@ -3,6 +3,7 @@ const glob = require('glob')
 const fs = require('fs-extra')
 const async = require('async')
 const parsePath = require('parse-filepath')
+const prettifier = require('./utils/pretty-renderer')
 
 const debug = require('debug')('gatsby:post-build')
 
@@ -16,7 +17,7 @@ const globP = (globString, options) => new Promise((resolve, reject) => {
   glob(globString, options, (err, files) => (err ? reject(err) : resolve(files)))
 })
 
-exports.postBuild = function postBuild (pages, callback) {
+exports.postBuild = (pages, callback) => {
   debug('copying files to target directories')
   const processFile = (file, cb) => {
     isdir(file).then((dir) => {
@@ -45,4 +46,12 @@ exports.postBuild = function postBuild (pages, callback) {
     globP(globString, { follow: true }),
     globP(`${__dirname}/static/**/*`, { follow: true }),
   ]).then(files => async.map([].concat(...files), processFile, error => callback(error)))
+}
+
+exports.modifyWebpackConfig = (config, stage) => {
+  if (stage === 'build-html') {
+    config.removePlugin('static-site-generator')
+    config.plugin('static-site-generator', prettifier, ['render-page.js', []])
+  }
+  return config
 }
