@@ -50,8 +50,9 @@ exports.postBuild = (pages, callback) => {
 
 exports.modifyWebpackConfig = (config, stage) => {
   if (stage === 'build-html') {
+    const routes = config._plugins['static-site-generator'].parameters[1].slice()
     config.removePlugin('static-site-generator')
-    config.plugin('static-site-generator', prettifier, ['render-page.js', []])
+    config.plugin('prettier-static-site-generator', prettifier, ['render-page.js', routes])
   }
   return config
 }
