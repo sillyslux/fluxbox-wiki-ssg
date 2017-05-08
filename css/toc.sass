@@ -43,6 +43,33 @@
           background-color: initial
           color: #d9230f
           border-left-color: #d9230f
+  button
+    position: absolute
+    top: 0
+    margin-left: 201px
+  .affix + button
+    position: fixed
+    top: 78px
+    .tooltip
+      left: -280px !important
+  .tooltip
+    margin-left: 155px
+  &.hideToc
+    position: absolute
+    right: 0
+    height: 41px
+    overflow-x: hidden
+    .tooltip
+      left: -280px !important
+    ul
+      display: none
+    button
+      margin-left: 0
+      right: 0
+      transition: transform .2s linear
+      transform: translateX(15px)
+      &:hover
+        transform: translateX(0)
 
 #spytoc
   &.affix
