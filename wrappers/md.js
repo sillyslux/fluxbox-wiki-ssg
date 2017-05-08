@@ -19,7 +19,7 @@ export default class Markdown extends Component {
         (p.path && prefixLink(p.path) === path)
       )
       let fixedLink = page && page.path
-      fixedLink = fixedLink && (hashed ? `href="${prefixLink(fixedLink)}#${hashed[2]}"` : `href="${prefixLink(fixedLink)}""`)
+      fixedLink = fixedLink && (hashed ? `href="${prefixLink(fixedLink)}#${hashed[2]}"` : `href="${prefixLink(fixedLink)}"`)
       return fixedLink || attr
     })
     return (
