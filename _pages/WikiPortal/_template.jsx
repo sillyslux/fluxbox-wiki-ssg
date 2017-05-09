@@ -3,8 +3,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { pages } from 'config'
+import i18n from 'i18n'
+
 import { prefixLink } from 'gatsby-helpers'
 import getPageProps from 'utils/pageInfo'
+import moment from 'moment'
 
 import { Grid, Col, Row, Nav, NavItem } from 'react-bootstrap-externaljs'
 import { LinkContainer } from 'react-router-bootstrap'
@@ -22,6 +25,7 @@ const NavItemRouted = item => (
 export default class WikiPortal extends Component {
   render () {
     const { page, language } = getPageProps(this.props.location.pathname)
+    moment.locale(language)
 
     const navPages = {}
     const regex = new RegExp(`^WikiPortal/.+/${language}.md`)
@@ -55,7 +59,7 @@ export default class WikiPortal extends Component {
             <Col
               xs={12}
               dangerouslySetInnerHTML={{ __html: `
-                Last modified: <a href="//github.com/sillyslux/fluxbox-wiki/commit/${page.data.git.commit}#${page.data.git.fsha}">${page.data.git.author}</a> (${page.data.git.date})
+                ${i18n.modified[language]} <a href="//github.com/sillyslux/fluxbox-wiki/commit/${page.data.git.commit}#${page.data.git.fsha}">${page.data.git.author}</a> (${moment(page.data.git.date).format('LLLL')})
               ` }}
             />
           </Row>

@@ -7,7 +7,6 @@ const string = require('string')
 const { linkPrefix } = require('toml').parse(String(require('fs').readFileSync('./config.toml')))
 const nodegit = require('nodegit')
 const path = require('path')
-const parse = require('date-fns/parse')
 
 const highlight = function (str, lang) {
   if ((lang !== null) && hljs.getLanguage(lang)) {
@@ -88,6 +87,7 @@ const md = markdownIt({
 
 module.exports = function (content) {
   let repo
+  console.log(__dirname, '../../pages/.git')
   const getGitData = fpath => nodegit.Repository.open(path.resolve(__dirname, '../../pages/.git'))
   .then(r => {
     repo = r
@@ -119,7 +119,7 @@ module.exports = function (content) {
     const git = commit ? {
       author: commit.author().name(),
       message: commit.message(),
-      date: parse(commit.date()),
+      date: commit.date(),
       commit: commit.sha(),
       fsha: entry.sha(),
       fid: entry.id().tostrS(),
