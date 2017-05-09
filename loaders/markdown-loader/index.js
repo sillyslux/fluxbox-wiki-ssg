@@ -98,7 +98,7 @@ module.exports = function (content) {
     walker.push(commit.sha())
     walker.sorting(nodegit.Revwalk.SORT.TIME)
 
-    return walker.fileHistoryWalk(fpath, 100)
+    return walker.fileHistoryWalk(fpath, 10)
   })
   .then(commitsPerFile => (commitsPerFile.length ? commitsPerFile[0].commit : null))
 
@@ -112,6 +112,7 @@ module.exports = function (content) {
   console.log(filename)
   getGitData(filename)
   .then((commit) => {
+    if (!commit) return
     commit.repo = repo
     return commit.getEntry(filename).then(entry => ({ commit, entry }))
   })
