@@ -5,6 +5,9 @@ const hljs = require('highlight.js')
 const objectAssign = require('object-assign')
 const string = require('string')
 const { linkPrefix } = require('toml').parse(String(require('fs').readFileSync('./config.toml')))
+const nodegit = require('nodegit')
+const path = require('path')
+const parse = require('date-fns/parse')
 
 const highlight = function (str, lang) {
   if ((lang !== null) && hljs.getLanguage(lang)) {
@@ -84,14 +87,47 @@ const md = markdownIt({
   .use(permalink)
 
 module.exports = function (content) {
+  let repo
+  const getGitData = fpath => nodegit.Repository.open(path.resolve(__dirname, '../../pages/.git'))
+  .then(r => {
+    repo = r
+    return repo.getBranchCommit('master')
+  })
+  .then((commit) => {
+    const walker = repo.createRevWalk()
+    walker.push(commit.sha())
+    walker.sorting(nodegit.Revwalk.SORT.TIME)
+
+    return walker.fileHistoryWalk(fpath, 500)
+  })
+  .then(commitsPerFile => (commitsPerFile.length ? commitsPerFile[0].commit : null))
+
   this.cacheable()
+  const callback = this.async()
   const meta = frontMatter(content)
   const body = md.render(meta.body)
   const toc = createTOC(tocItems.slice())
-  const result = objectAssign({}, meta.attributes, {
-    body, toc,
-  })
+  const filename = this._module.rawRequest.slice(2)
   tocItems.length = 0
-  this.value = result
-  return `module.exports = ${JSON.stringify(result)}`
+  // console.log(filename)
+  getGitData(filename)
+  .then((commit) => {
+    commit.repo = repo
+    return commit.getEntry(filename).then(entry => ({ commit, entry }))
+  })
+  .then(({ commit, entry }) => {
+    const git = commit ? {
+      author: commit.author().name(),
+      message: commit.message(),
+      date: parse(commit.date()),
+      commit: commit.sha(),
+      fsha: entry.sha(),
+      fid: entry.id().tostrS(),
+      foid: entry.oid(),
+    } : null
+    const result = objectAssign({}, meta.attributes, {
+      body, toc, git,
+    })
+    callback(null, `module.exports = ${JSON.stringify(result)}`)
+  })
 }

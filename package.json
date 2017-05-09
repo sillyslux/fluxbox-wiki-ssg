@@ -6,6 +6,7 @@
   "author": "sillyslux <sillyslux@net.hr>",
   "dependencies": {
     "cheerio": "^0.22.0",
+    "date-fns": "^1.28.4",
     "front-matter": "^2.1.2",
     "gatsby": "^0.12.44",
     "highlight.js": "^9.8.0",
@@ -20,6 +21,7 @@
     "markdown-it-header-sections": "^0.2.2",
     "markdown-it-replace-link": "^1.0.1",
     "markdown-it-sub": "^1.0.0",
+    "nodegit": "^0.18.3",
     "object-assign": "^4.1.1",
     "octicons": "^5.0.1",
     "prop-types": "^15.5.8",

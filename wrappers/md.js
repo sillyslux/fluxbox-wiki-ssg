@@ -9,6 +9,7 @@ import style from 'css/markdown.module.sass'
 export default class Markdown extends Component {
   render () {
     const post = this.props.route.page.data
+
     post.body = post.body.replace(/href="([^"]+)"/g, (attr, link) => {
       const hashed = link.match(/(.+)#(.+)/)
       const path = (hashed && hashed[1]) || link
@@ -28,6 +29,7 @@ export default class Markdown extends Component {
           title={`${post.title} - ${config.siteTitle}`}
         />
         <div dangerouslySetInnerHTML={{ __html: post.body }} />
+        <div style={{ textAlign: 'right', transform: 'translateY(40px)' }} dangerouslySetInnerHTML={{ __html: `Last modified: <a href="//github.com/sillyslux/fluxbox-wiki/commit/${post.git.commit}#${post.git.fsha}">${post.git.author}</a> (${post.git.date})` }} />
       </div>
     )
   }
