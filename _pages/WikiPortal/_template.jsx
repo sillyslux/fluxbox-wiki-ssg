@@ -2,11 +2,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import { pages } from 'config'
+import { prefixLink } from 'gatsby-helpers'
+import getPageProps from 'utils/pageInfo'
+
 import { Grid, Col, Nav, NavItem } from 'react-bootstrap-externaljs'
 import { LinkContainer } from 'react-router-bootstrap'
-import { prefixLink } from 'gatsby-helpers'
-import { pages } from 'config'
-import pageInfo from 'utils/pageInfo'
 import PageIndex from 'custom/PageIndex'
 
 import styles from 'css/wiki-portal.module'
@@ -20,7 +21,7 @@ const NavItemRouted = item => (
 
 export default class WikiPortal extends Component {
   render () {
-    const { page, language } = pageInfo(this.props.location.pathname)
+    const { page, language } = getPageProps(this.props.location.pathname)
 
     const navPages = {}
     const regex = new RegExp(`^WikiPortal/.+/${language}.md`)
@@ -29,6 +30,8 @@ export default class WikiPortal extends Component {
         const name = p.requirePath.split('/')[1]
         navPages[name] = { path: p.data.path, title: p.data.title }
       })
+
+    const modInfo = page.data.git ? <div style={{ textAlign: 'right' }} dangerouslySetInnerHTML={{ __html: `Last modified: <a href="//github.com/sillyslux/fluxbox-wiki/commit/${page.data.git.commit}#${page.data.git.fsha}">${page.data.git.author}</a> (${page.data.git.date})` }} /> : null
 
     return (
       <Grid className={styles.wikiPortal}>
@@ -45,6 +48,7 @@ export default class WikiPortal extends Component {
           {this.props.children}
           {page.file.dir === 'WikiPortal/Index' ? <PageIndex location={this.props.location} wiki="user" /> : ''}
         </Col>
+        {modInfo}
       </Grid>
     )
   }
