@@ -53,10 +53,9 @@ export default class WikiPage extends Component {
           </Panel>
         </Row>
         {page.data.git ?
-          <Row>
+          <Row className="modInfo">
             <Col
               xs={12}
-              className="modInfo"
               dangerouslySetInnerHTML={{ __html: `
                 Last modified: <a href="//github.com/sillyslux/fluxbox-wiki/commit/${page.data.git.commit}#${page.data.git.fsha}">${page.data.git.author}</a> (${page.data.git.date})
               ` }}

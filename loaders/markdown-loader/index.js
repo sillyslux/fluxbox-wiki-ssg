@@ -109,7 +109,7 @@ module.exports = function (content) {
   const toc = createTOC(tocItems.slice())
   const filename = this._module.rawRequest.slice(2)
   tocItems.length = 0
-  // console.log(filename)
+  console.log(filename)
   getGitData(filename)
   .then((commit) => {
     commit.repo = repo
