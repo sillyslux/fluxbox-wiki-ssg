@@ -2,6 +2,8 @@
 // should be visible only in wiki-entry and devel-entry
 
 .wikiPortal
+  display: flex
+  flex-direction: column
   padding-top: 100px
   & :global
 
@@ -37,3 +39,6 @@
         display: none
       .markdown-container p
         font-size: 14px
+    .modInfo
+      margin-bottom: -20px
+      text-align: right

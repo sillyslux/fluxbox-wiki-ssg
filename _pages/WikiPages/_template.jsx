@@ -1,7 +1,7 @@
 /* global localStorage */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import pageInfo from 'utils/pageInfo'
+import getPageProps from 'utils/pageInfo'
 import styles from 'css/wiki-page.module.sass'
 import { Nav, Panel, Grid, Col, Row, OverlayTrigger, Button, Glyphicon, Tooltip } from 'react-bootstrap-externaljs'
 import 'css/toc.sass'
@@ -25,7 +25,7 @@ export default class WikiPage extends Component {
   }
 
   render () {
-    const { page } = pageInfo(this.props.location.pathname)
+    const { page } = getPageProps(this.props.location.pathname)
 
     return (
       <Grid className={styles['wiki-page']}>
@@ -52,6 +52,17 @@ export default class WikiPage extends Component {
             </Col>
           </Panel>
         </Row>
+        {page.data.git ?
+          <Row>
+            <Col
+              xs={12}
+              className="modInfo"
+              dangerouslySetInnerHTML={{ __html: `
+                Last modified: <a href="//github.com/sillyslux/fluxbox-wiki/commit/${page.data.git.commit}#${page.data.git.fsha}">${page.data.git.author}</a> (${page.data.git.date})
+              ` }}
+            />
+          </Row>
+        : null }
       </Grid>
     )
   }

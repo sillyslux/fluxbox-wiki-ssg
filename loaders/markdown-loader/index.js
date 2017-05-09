@@ -98,7 +98,7 @@ module.exports = function (content) {
     walker.push(commit.sha())
     walker.sorting(nodegit.Revwalk.SORT.TIME)
 
-    return walker.fileHistoryWalk(fpath, 500)
+    return walker.fileHistoryWalk(fpath, 100)
   })
   .then(commitsPerFile => (commitsPerFile.length ? commitsPerFile[0].commit : null))
 
