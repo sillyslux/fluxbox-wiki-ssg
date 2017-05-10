@@ -1,3 +1,4 @@
+const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
@@ -41,6 +42,16 @@ module.exports = {
       filename: '../css/editor.global.sass',
       disable: process.env.NODE_ENV === 'development',
       allChunks: true,
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+        screw_ie8: true,
+        drop_console: true,
+      },
+      output: {
+        comments: false,
+      },
     }),
   ],
 }

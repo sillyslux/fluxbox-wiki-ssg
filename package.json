@@ -48,7 +48,7 @@
   "scripts": {
     "clean": "rm -rf pages pages-src public",
     "load-pages": "git clone --depth=1 https://github.com/sillyslux/fluxbox-wiki.git pages-src && mkdir pages && cp -r pages-src/* pages && cp -r _pages/* pages",
-    "build-js": "webpack -p --config editor/webpack.config.js && webpack -p --config public-js/webpack.config.js",
+    "build-js": "webpack -p --quiet --no-info --config editor/webpack.config.js && webpack -p --quiet --no-info --config public-js/webpack.config.js",
     "build": "DEBUG=gatsby:* node_modules/.bin/gatsby build --prefix-links",
     "travis-build": "npm run clean && npm run load-pages && npm run build && npm run build-js",
     "develop": "gatsby develop"
