@@ -114,7 +114,7 @@ module.exports = function (content) {
   tocItems.length = 0
   sh.exec(`git log -1 --pretty=format:sha=\\"%H\\"%nauthor=\\"%an\\"%ndate=\\"%ai\\"%nsubject=\\"%s\\"%nmsg=\\"%b\\"%n ${filename}`, {
     cwd: path.resolve(__dirname, '../../pages-src'),
-    silent: true,
+    // silent: true,
   }, (exit, stdout, stderr) => {
     if (stderr) console.warn(stderr)
     const commit = toml(stdout)
@@ -125,7 +125,6 @@ module.exports = function (content) {
       date: commit.date,
       subject: commit.subject,
     } : null
-    console.log(git)
     const result = objectAssign({}, meta.attributes, {
       body, toc, git,
     })

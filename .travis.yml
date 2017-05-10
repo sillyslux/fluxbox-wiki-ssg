@@ -5,17 +5,17 @@ script:
   - npm run-script travis-build
   - webpack --config editor/webpack.config.js
 after_script:
-  - echo $(cd pages;git log -1 WikiPages/Login-Manager/WDM/en.md)
-  - git clone -b gh-pages https://github.com/sillyslux/fluxbox-wiki.git gh-pages
-  - rm -r gh-pages/* && cp -r public/* gh-pages
-  - cd gh-pages
-  - git add --all .
   - export C_MESSAGE=${C_MESSAGE:=$TRAVIS_COMMIT_MESSAGE}
   - export GIT_COMMITTER_NAME=${C_COMMITTER_NAME:=sillyslux}
   - export GIT_COMMITTER_EMAIL=${C_COMMITTER_EMAIL:=sillyslux@net.hr}
   - export GIT_AUTHOR_NAME=${C_AUTHOR_NAME:=sillyslux}
   - export GIT_AUTHOR_EMAIL=${C_AUTHOR_EMAIL:=sillyslux@net.hr}
   - export GIT_MESSAGE=$(cd ../pages_src;git log -1 --pretty=%s)
+  - echo $(cd pages;git log -1 WikiPages/Login-Manager/WDM/en.md)
+  - git clone -b gh-pages https://github.com/sillyslux/fluxbox-wiki.git gh-pages
+  - rm -r gh-pages/* && cp -r public/* gh-pages
+  - cd gh-pages
+  - git add --all .
   - env
   - git commit -m "$GIT_MESSAGE" -m "build triggered from $TRAVIS_EVENT_TYPE"
   - git push https://$GITHUB_TOKEN@github.com/sillyslux/fluxbox-wiki.git gh-pages
