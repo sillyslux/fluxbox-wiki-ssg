@@ -13,8 +13,8 @@ after_script:
   - cd gh-pages
   - git add --all .
   - export C_MESSAGE=${C_MESSAGE:=$TRAVIS_COMMIT_MESSAGE}
-  - export GIT_COMMITTER_NAME=sillyslux
-  - export GIT_COMMITTER_EMAIL=sillyslux@net.hr
+  - export GIT_COMMITTER_NAME=${C_COMMITTER_NAME:=sillyslux}
+  - export GIT_COMMITTER_EMAIL=${C_COMMITTER_EMAIL:=sillyslux@net.hr}
   - export GIT_AUTHOR_NAME=${C_AUTHOR_NAME:=sillyslux}
   - export GIT_AUTHOR_EMAIL=${C_AUTHOR_EMAIL:=sillyslux@net.hr}
   - env
