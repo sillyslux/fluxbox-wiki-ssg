@@ -34,7 +34,7 @@ export default class WikiPortal extends Component {
         const name = p.requirePath.split('/')[1]
         navPages[name] = { path: p.data.path, title: p.data.title }
       })
-
+    const modDate = page.data.git ? moment(page.data.git.date, 'YYYY-MM-DD HH:mm:ss Z').format('LLLL') : null
     return (
       <Grid className={styles.wikiPortal}>
         <Row>
@@ -59,7 +59,7 @@ export default class WikiPortal extends Component {
             <Col
               xs={12}
               dangerouslySetInnerHTML={{ __html: `
-                ${modified[language]} <a href="//github.com/sillyslux/fluxbox-wiki/commit/${page.data.git.sha}">${page.data.git.author}</a> (${moment(page.data.git.date).format('LLLL')})
+                ${modified[language]} <a href="//github.com/sillyslux/fluxbox-wiki/commit/${page.data.git.sha}">${page.data.git.author}</a> (${modDate})
               ` }}
             />
           </Row>

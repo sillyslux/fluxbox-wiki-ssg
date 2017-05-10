@@ -5,6 +5,7 @@ import getPageProps from 'utils/pageInfo'
 import styles from 'css/wiki-page.module.sass'
 import { Nav, Panel, Grid, Col, Row, OverlayTrigger, Button, Glyphicon, Tooltip } from 'react-bootstrap-externaljs'
 import 'css/toc.sass'
+import moment from 'moment'
 
 export default class WikiPage extends Component {
   constructor (props) {
@@ -25,7 +26,9 @@ export default class WikiPage extends Component {
   }
 
   render () {
-    const { page } = getPageProps(this.props.location.pathname)
+    const { page, language } = getPageProps(this.props.location.pathname)
+    moment.locale(language)
+    const modDate = page.data.git ? moment(page.data.git.date, 'YYYY-MM-DD HH:mm:ss Z').format('LLLL') : null
 
     return (
       <Grid className={styles['wiki-page']}>
@@ -57,7 +60,7 @@ export default class WikiPage extends Component {
             <Col
               xs={12}
               dangerouslySetInnerHTML={{ __html: `
-                Last modified: <a href="//github.com/sillyslux/fluxbox-wiki/commit/${page.data.git.commit}#${page.data.git.fsha}">${page.data.git.author}</a> (${page.data.git.date})
+                Last modified: <a href="//github.com/sillyslux/fluxbox-wiki/commit/${page.data.git.sha}">${page.data.git.author}</a> (${modDate})
               ` }}
             />
           </Row>
