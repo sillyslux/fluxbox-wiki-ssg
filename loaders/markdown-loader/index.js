@@ -113,7 +113,7 @@ module.exports = function (content) {
   const filename = this._module.rawRequest.slice(2) //eslint-disable-line
   tocItems.length = 0
   sh.exec(`git log -1 --pretty=format:sha=\\"%H\\"%nauthor=\\"%an\\"%ndate=\\"%aI\\"%nsubject=\\"%s\\"%nmsg=\\"%b\\"%n ${filename}`, {
-    cwd: path.resolve(__dirname, '../../pages'),
+    cwd: path.resolve(__dirname, '../../pages-src'),
   }, (exit, stdout, stderr) => {
     if (stderr) console.warn(stderr)
     const commit = toml(stdout)
