@@ -1,12 +1,12 @@
-/* eslint max-len: ["error", 110] */
+/* eslint max-len: ["error", { "code": 200 }] */
+
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { pages } from 'config'
-import i18n from 'i18n'
-
 import { prefixLink } from 'gatsby-helpers'
+import { pages } from 'config'
 import getPageProps from 'utils/pageInfo'
+import { modified } from 'i18n'
 import moment from 'moment'
 
 import { Grid, Col, Row, Nav, NavItem } from 'react-bootstrap-externaljs'
@@ -59,9 +59,7 @@ export default class WikiPortal extends Component {
             <Col
               xs={12}
               dangerouslySetInnerHTML={{ __html: `
-                ${i18n.modified[language]} <a
-                  href="//github.com/sillyslux/fluxbox-wiki/commit/${page.data.git.sha}"
-                  >${page.data.git.author}</a> (${moment(page.data.git.date).format('LLLL')})
+                ${modified[language]} <a href="//github.com/sillyslux/fluxbox-wiki/commit/${page.data.git.sha}">${page.data.git.author}</a> (${moment(page.data.git.date).format('LLLL')})
               ` }}
             />
           </Row>
