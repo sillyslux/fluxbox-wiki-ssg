@@ -59,7 +59,9 @@ export default class WikiPortal extends Component {
             <Col
               xs={12}
               dangerouslySetInnerHTML={{ __html: `
-                ${i18n.modified[language]} <a href="//github.com/sillyslux/fluxbox-wiki/commit/${page.data.git.commit}#${page.data.git.fsha}">${page.data.git.author}</a> (${moment(page.data.git.date).format('LLLL')})
+                ${i18n.modified[language]} <a
+                  href="//github.com/sillyslux/fluxbox-wiki/commit/${page.data.git.sha}"
+                  >${page.data.git.author}</a> (${moment(page.data.git.date).format('LLLL')})
               ` }}
             />
           </Row>

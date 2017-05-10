@@ -5,8 +5,10 @@ const hljs = require('highlight.js')
 const objectAssign = require('object-assign')
 const string = require('string')
 const { linkPrefix } = require('toml').parse(String(require('fs').readFileSync('./config.toml')))
-const nodegit = require('nodegit')
+// const nodegit = require('nodegit')
+const sh = require('shelljs')
 const path = require('path')
+const toml = require('toml').parse
 
 const highlight = function (str, lang) {
   if ((lang !== null) && hljs.getLanguage(lang)) {
@@ -86,49 +88,68 @@ const md = markdownIt({
   .use(permalink)
 
 module.exports = function (content) {
-  let repo
-  console.log(__dirname, '../../pages/.git')
-  const getGitData = fpath => nodegit.Repository.open(path.resolve(__dirname, '../../pages/.git'))
-  .then(r => {
-    repo = r
-    return repo.getBranchCommit('master')
-  })
-  .then((commit) => {
-    const walker = repo.createRevWalk()
-    walker.push(commit.sha())
-    walker.sorting(nodegit.Revwalk.SORT.TIME)
-
-    return walker.fileHistoryWalk(fpath, 10)
-  })
-  .then(commitsPerFile => (commitsPerFile.length ? commitsPerFile[0].commit : null))
+  // let repo
+  // console.log(__dirname, '../../pages/.git')
+  // const getGitData = fpath => nodegit.Repository.open(
+  // path.resolve(__dirname, '../../pages/.git'))
+  // .then(r => {
+  //   repo = r
+  //   return repo.getBranchCommit('master')
+  // })
+  // .then((commit) => {
+  //   const walker = repo.createRevWalk()
+  //   walker.push(commit.sha())
+  //   walker.sorting(nodegit.Revwalk.SORT.TIME)
+  //
+  //   return walker.fileHistoryWalk(fpath, 10)
+  // })
+  // .then(commitsPerFile => (commitsPerFile.length ? commitsPerFile[0].commit : null))
 
   this.cacheable()
   const callback = this.async()
   const meta = frontMatter(content)
   const body = md.render(meta.body)
   const toc = createTOC(tocItems.slice())
-  const filename = this._module.rawRequest.slice(2)
+  const filename = this._module.rawRequest.slice(2) //eslint-disable-line
   tocItems.length = 0
-  console.log(filename)
-  getGitData(filename)
-  .then((commit) => {
-    if (!commit) return
-    commit.repo = repo
-    return commit.getEntry(filename).then(entry => ({ commit, entry }))
-  })
-  .then(({ commit, entry }) => {
-    const git = commit ? {
-      author: commit.author().name(),
-      message: commit.message(),
-      date: commit.date(),
-      commit: commit.sha(),
-      fsha: entry.sha(),
-      fid: entry.id().tostrS(),
-      foid: entry.oid(),
+  sh.exec(`git log -1 --pretty=format:sha=\\"%H\\"%nauthor=\\"%an\\"%ndate=\\"%aI\\"%nsubject=\\"%s\\"%nmsg=\\"%b\\"%n ${filename}`, {
+    cwd: path.resolve(__dirname, '../../pages'),
+  }, (exit, stdout, stderr) => {
+    if (stderr) console.warn(stderr)
+    const commit = toml(stdout)
+    const git = !stderr ? {
+      sha: commit.sha,
+      author: commit.author,
+      msg: commit.msg,
+      date: commit.date,
+      subject: commit.subject,
     } : null
     const result = objectAssign({}, meta.attributes, {
       body, toc, git,
     })
     callback(null, `module.exports = ${JSON.stringify(result)}`)
   })
+
+  // console.log(filename)
+  // getGitData(filename)
+  // .then((commit) => {
+  //   if (!commit) return
+  //   commit.repo = repo
+  //   return commit.getEntry(filename).then(entry => ({ commit, entry }))
+  // })
+  // .then(({ commit, entry }) => {
+  //   const git = commit ? {
+  //     author: commit.author().name(),
+  //     message: commit.message(),
+  //     date: commit.date(),
+  //     commit: commit.sha(),
+  //     fsha: entry.sha(),
+  //     fid: entry.id().tostrS(),
+  //     foid: entry.oid(),
+  //   } : null
+  //   const result = objectAssign({}, meta.attributes, {
+  //     body, toc, git,
+  //   })
+  //   callback(null, `module.exports = ${JSON.stringify(result)}`)
+  // })
 }
