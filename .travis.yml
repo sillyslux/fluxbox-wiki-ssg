@@ -17,8 +17,9 @@ after_script:
   - export GIT_COMMITTER_EMAIL=${C_COMMITTER_EMAIL:=sillyslux@net.hr}
   - export GIT_AUTHOR_NAME=${C_AUTHOR_NAME:=sillyslux}
   - export GIT_AUTHOR_EMAIL=${C_AUTHOR_EMAIL:=sillyslux@net.hr}
+  - export GIT_MESSAGE=$(cd pages;git log -1 --pretty=%s)
   - env
-  - git commit -m "$C_MESSAGE" -m "build triggered from $TRAVIS_EVENT_TYPE"
+  - git commit -m "$GIT_MESSAGE" -m "build triggered from $TRAVIS_EVENT_TYPE"
   - git push https://$GITHUB_TOKEN@github.com/sillyslux/fluxbox-wiki.git gh-pages
 git:
   depth: 1
