@@ -113,7 +113,7 @@ module.exports = function (content) {
   const filename = this._module.rawRequest.slice(2) //eslint-disable-line
   tocItems.length = 0
   sh.exec(`git log -1 --pretty=format:sha=\\"%H\\"%nauthor=\\"%an\\"%ndate=\\"%ai\\"%nsubject=\\"%s\\"%nmsg=\\"%b\\"%n ${filename}`, {
-    cwd: path.resolve(__dirname, '../../pages'),
+    cwd: path.resolve(__dirname, '../../pages-src'),
     silent: true,
   }, (exit, stdout, stderr) => {
     if (stderr) console.warn(stderr)
@@ -125,6 +125,7 @@ module.exports = function (content) {
       date: commit.date,
       subject: commit.subject,
     } : null
+    console.log(git)
     const result = objectAssign({}, meta.attributes, {
       body, toc, git,
     })
