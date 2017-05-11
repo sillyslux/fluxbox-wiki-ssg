@@ -10,7 +10,7 @@ after_script:
   - export GIT_COMMITTER_EMAIL=${C_COMMITTER_EMAIL:=sillyslux@net.hr}
   - export GIT_AUTHOR_NAME=${C_AUTHOR_NAME:=sillyslux}
   - export GIT_AUTHOR_EMAIL=${C_AUTHOR_EMAIL:=sillyslux@net.hr}
-  - if [[ "$TRAVIS_EVENT_TYPE" == "api" ]]; then export GIT_MESSAGE=$(cd ../pages-src;git log -1 --pretty=%s); export GIT_MESSAGE_MORE="build triggered from push(merge) to sillyslux/fluxbox-wiki"; else export GIT_MESSAGE="(SSG updated)$TRAVIS_COMMIT_MESSAGE"; export GIT_MESSAGE_MORE="build triggered from push at sillyslux/fluxbox-wiki-ssg"; fi;
+  - if [[ "$TRAVIS_EVENT_TYPE" == "api" ]]; then export GIT_MESSAGE=$(cd ../pages-src;git log -1 --pretty=%s); export GIT_MESSAGE_MORE="build triggered from push(merge) to sillyslux/fluxbox-wiki"; else export GIT_MESSAGE="(fluxbox-wiki-ssg) $TRAVIS_COMMIT_MESSAGE"; export GIT_MESSAGE_MORE="build triggered from push at sillyslux/fluxbox-wiki-ssg"; fi;
   - git clone -b gh-pages https://github.com/sillyslux/fluxbox-wiki.git gh-pages
   - rm -r gh-pages/* && cp -r public/* gh-pages
   - cd gh-pages

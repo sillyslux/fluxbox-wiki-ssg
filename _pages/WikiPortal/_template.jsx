@@ -6,12 +6,11 @@ import PropTypes from 'prop-types'
 import { prefixLink } from 'gatsby-helpers'
 import { pages } from 'config'
 import getPageProps from 'utils/pageInfo'
-import { modified } from 'i18n'
-import moment from 'moment'
 
 import { Grid, Col, Row, Nav, NavItem } from 'react-bootstrap-externaljs'
 import { LinkContainer } from 'react-router-bootstrap'
 import PageIndex from 'custom/PageIndex'
+import ModInfo from 'custom/ModInfo'
 
 import styles from 'css/wiki-portal.module'
 
@@ -25,7 +24,6 @@ const NavItemRouted = item => (
 export default class WikiPortal extends Component {
   render () {
     const { page, language } = getPageProps(this.props.location.pathname)
-    moment.locale(language)
 
     const navPages = {}
     const regex = new RegExp(`^WikiPortal/.+/${language}.md`)
@@ -34,7 +32,7 @@ export default class WikiPortal extends Component {
         const name = p.requirePath.split('/')[1]
         navPages[name] = { path: p.data.path, title: p.data.title }
       })
-    const modDate = page.data.git ? moment(page.data.git.date, 'YYYY-MM-DD HH:mm:ss Z').format('LLLL') : null
+
     return (
       <Grid className={styles.wikiPortal}>
         <Row>
@@ -54,16 +52,7 @@ export default class WikiPortal extends Component {
             : null}
           </Col>
         </Row>
-        {page.data.git ?
-          <Row className="modInfo">
-            <Col
-              xs={12}
-              dangerouslySetInnerHTML={{ __html: `
-                ${modified[language]} <a href="//github.com/sillyslux/fluxbox-wiki/commit/${page.data.git.sha}">${page.data.git.author}</a> (${modDate})
-              ` }}
-            />
-          </Row>
-        : null }
+        <ModInfo location={this.props.location} />
       </Grid>
     )
   }
